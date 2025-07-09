@@ -24,7 +24,7 @@ def display_order_result(order):
     table = Table(title="Order Result")
     table.add_column("Field",style = "cyan", no_wrap = True)
     table.add_column("Value", style="magenta")
-    for key in ["symbol", "side", "type", "status", "price", "executedQty"]:
+    for key in ["symbol", "side", "type", "status", "price", "executedQty","stopPrice","workingType","origQty"]:
         table.add_row(key, str(order.get(key, "-")))
     console.print(table)
 
@@ -242,7 +242,7 @@ def main():
             if len(twap_orders)!=0:
                 console.rule("[bold green]TWAP Orders Placed[/bold green]")
                 for order in twap_orders:
-                    display_order_result(twap_orders)
+                    display_order_result(order)
 
         elif action == "Grid":
             symbol = get_fuzzy_symbol(bot.get_trading_pairs())
@@ -264,7 +264,7 @@ def main():
             if len(grid_orders) != 0 :
                 console.rule("[bold cyan]Grid Orders Placed[/bold cyan]")
                 for order in grid_orders:
-                    display_order_result(grid_orders)
+                    display_order_result(order)
             
         elif action == "Balance":    
             accounts = bot.get_balance()
